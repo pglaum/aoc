@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "aoc"
+version = "0.1.0"
+description = ""
+authors = ["Philipp Glaum <p@pglaum.de>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.28.1"
+click = "^8.1.7"
+pygit2 = "^1.16.0"
+gitpython = "^3.1.43"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
