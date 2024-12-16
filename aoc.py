@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from datetime import datetime
 import os
+import re
 
 import click
 import httpx
@@ -96,6 +97,15 @@ def submit(day: int, year: int, part: int, result: str):
     res = httpx.post(url, data={'level': part, 'answer': result}, headers={'cookie': cookie})
     if "That's the right answer!" in res.text:
         click.secho('Correct answer!', fg='green')
+    elif "Did you already complete it?" in res.text:
+        click.secho("That doesn't seem like the right level. Did you already complete it?", fg='yellow')
+    elif "That's not the right answer; your answer is too high." in res.text:
+        click.secho("That's not the right answer; your answer is too high.", fg='red')
+    elif "You gave an answer too recently" in res.text:
+        click.secho("You gave an answer too recently.", fg='yellow')
+        seconds = re.findall(r'You have (\d+)s left', res.text)
+        if seconds and len(seconds) > 0:
+            click.secho(f"Wait another {seconds[0]} seconds.", fg='yellow')
     else:
         print(res.text)
 
