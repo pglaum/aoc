@@ -101,6 +101,8 @@ def submit(day: int, year: int, part: int, result: str):
         click.secho("That doesn't seem like the right level. Did you already complete it?", fg='yellow')
     elif "That's not the right answer; your answer is too high." in res.text:
         click.secho("That's not the right answer; your answer is too high.", fg='red')
+    elif "That's not the right answer; your answer is too low." in res.text:
+        click.secho("That's not the right answer; your answer is too low.", fg='red')
     elif "That's not the right answer." in res.text:
         click.secho("That's not the right answer.", fg='red')
     elif "You gave an answer too recently" in res.text:
